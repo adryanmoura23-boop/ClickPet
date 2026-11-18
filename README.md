@@ -33,4 +33,4 @@ imagens/
 - Nome, endereço, telefone e e-mail são fictícios.
 
 ## Autor
-[Seu nome completo] - 1º semestre de ADS, PUCRS.
+Adryan Kevin Moura de Assis  - 1º semestre de ADS, PUCRS.
