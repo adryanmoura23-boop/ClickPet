@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!-- ClickPet - Fase 2 | Projeto de Fundamentos de Sistemas Web (PUCRS) -->
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agende banho ou tosa no ClickPet com tele-busca ou entrega no local.">
+  <title>Agendamento - ClickPet</title>
+  <!-- Bootstrap 5 (CSS) via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <!-- Estilos próprios do ClickPet (carregados depois, para poder sobrescrever o Bootstrap) -->
+  <link href="css/estilo.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Link para quem usa teclado ou leitor de tela pular direto ao conteúdo -->
+  <a class="visually-hidden-focusable" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- Barra superior: saudação (JavaScript), status da loja e botões de acessibilidade -->
+  <div class="barra-topo bg-dark text-white py-2">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div>
+        <span id="saudacao">Olá!</span>
+        <span id="status-loja" class="badge text-bg-secondary"></span>
+      </div>
+      <div class="d-flex align-items-center gap-2" role="group" aria-label="Opções de acessibilidade">
+        <button type="button" id="btn-fonte-menor" class="btn btn-sm btn-light" aria-label="Diminuir o tamanho da letra">A-</button>
+        <button type="button" id="btn-fonte-maior" class="btn btn-sm btn-light" aria-label="Aumentar o tamanho da letra">A+</button>
+        <button type="button" id="btn-contraste" class="btn btn-sm btn-light" aria-pressed="false">Alto contraste</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho com logo e menu de navegação (Bootstrap navbar) -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-clickpet" aria-label="Menu principal">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <img src="imagens/logo.png" alt="Logotipo do ClickPet: uma pata branca sobre fundo verde" width="44" height="44" class="rounded">
+          <span class="fw-bold">ClickPet</span>
+        </a>
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false" aria-label="Abrir ou fechar o menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="produtos.html">Produtos</a></li>
+          <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link" href="cadastro.html">Cadastro</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="agendamento.html">Agendamento</a></li>
+          <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo principal da página -->
+  <main id="conteudo" class="container py-4" tabindex="-1">
+    <h1>Agendamento de banho ou tosa</h1>
+    <p>Escolha o serviço, a forma de atendimento e o melhor dia e horário. Ainda não fez o cadastro do seu pet?
+      <a href="cadastro.html">Cadastre aqui</a>. Funcionamos de segunda a sexta, das 9h às 19h, e aos sábados, das 9h às 17h.</p>
+
+    <div id="aviso-agendamento" role="alert" tabindex="-1" aria-live="assertive"></div>
+
+    <form id="form-agendamento" class="needs-validation" novalidate>
+
+      <!-- 1) SERVIÇO -->
+      <fieldset class="grupo">
+        <legend>1. Serviço</legend>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="servico" id="serv-banho" value="banho" required>
+          <label class="form-check-label" for="serv-banho"><strong>Banho</strong> - R$ 50,00</label>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="radio" name="servico" id="serv-tosa" value="tosa">
+          <label class="form-check-label" for="serv-tosa"><strong>Tosa</strong> - R$ 70,00</label>
+          <div class="invalid-feedback">Escolha um serviço.</div>
+        </div>
+      </fieldset>
+
+      <!-- 2) MÉTODO: tele-busca ou entrega no local -->
+      <fieldset class="grupo">
+        <legend>2. Como será o atendimento?</legend>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="metodo" id="met-tele" value="tele-busca" required>
+          <label class="form-check-label" for="met-tele"><strong>Tele-busca</strong> - buscamos e levamos o pet no seu endereço</label>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="radio" name="metodo" id="met-local" value="entrega-local">
+          <label class="form-check-label" for="met-local"><strong>Entrega no local</strong> - você leva o pet até o ClickPet</label>
+          <div class="invalid-feedback">Escolha como será o atendimento.</div>
+        </div>
+
+        <!-- Aparece só na tele-busca (js/agendamento.js controla o atributo hidden) -->
+        <div id="bloco-endereco" hidden>
+          <p class="fw-bold mb-2">Endereço para a busca do pet</p>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="ag-rua" class="form-label obrigatorio">Rua / Avenida</label>
+              <input type="text" class="form-control" id="ag-rua" placeholder="Ex.: Rua das Palmeiras">
+              <div class="invalid-feedback">Informe a rua.</div>
+            </div>
+            <div class="col-md-2">
+              <label for="ag-numero" class="form-label obrigatorio">Número</label>
+              <input type="text" class="form-control" id="ag-numero" placeholder="123">
+              <div class="invalid-feedback">Informe o número.</div>
+            </div>
+            <div class="col-md-4">
+              <label for="ag-bairro" class="form-label obrigatorio">Bairro</label>
+              <input type="text" class="form-control" id="ag-bairro" placeholder="Ex.: Centro">
+              <div class="invalid-feedback">Informe o bairro.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Aparece só na entrega no local -->
+        <p id="bloco-local" class="alert alert-info" hidden>Traga o pet até: Rua das Palmeiras, 123 - Porto Alegre/RS, no horário agendado.</p>
+      </fieldset>
+
+      <!-- 3) DATA E HORA (calendário) -->
+      <fieldset class="grupo">
+        <legend>3. Dia e horário</legend>
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label for="data" class="form-label obrigatorio">Dia (calendário)</label>
+            <input type="date" class="form-control" id="data" name="data" required aria-describedby="msg-data">
+            <div id="msg-data" class="form-text" aria-live="polite"></div>
+            <div class="invalid-feedback">Escolha uma data válida (não aos domingos).</div>
+          </div>
+          <div class="col-md-6">
+            <label for="hora" class="form-label obrigatorio">Horário</label>
+            <select class="form-select" id="hora" name="hora" required disabled>
+              <option value="" selected disabled>Escolha um horário</option>
+            </select>
+            <div class="invalid-feedback">Escolha um horário.</div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- 4) DADOS DO TUTOR E DO PET -->
+      <fieldset class="grupo">
+        <legend>4. Seus dados</legend>
+        <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <label for="ag-tutor" class="form-label obrigatorio">Nome do tutor</label>
+            <input type="text" class="form-control" id="ag-tutor" required minlength="3" autocomplete="name">
+            <div class="invalid-feedback">Informe seu nome.</div>
+          </div>
+          <div class="col-md-4">
+            <label for="ag-telefone" class="form-label obrigatorio">Telefone / WhatsApp</label>
+            <input type="tel" class="form-control" id="ag-telefone" placeholder="(51) 99999-0000" required
+                   pattern="\(\d{2}\) \d{4,5}-\d{4}" maxlength="15" autocomplete="tel">
+            <div class="invalid-feedback">Informe o telefone com DDD.</div>
+          </div>
+          <div class="col-md-4">
+            <label for="ag-pet" class="form-label obrigatorio">Nome do pet</label>
+            <input type="text" class="form-control" id="ag-pet" required>
+            <div class="invalid-feedback">Informe o nome do pet.</div>
+          </div>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn btn-clickpet btn-lg">Confirmar agendamento</button>
+    </form>
+
+    <!-- Lista de agendamentos feitos neste navegador -->
+    <section class="mt-5" aria-labelledby="titulo-agenda">
+      <h2 id="titulo-agenda">Meus agendamentos</h2>
+      <p id="sem-agendamentos">Você ainda não tem agendamentos.</p>
+      <ul id="lista-agendamentos" class="list-group"></ul>
+    </section>
+  </main>
+
+  <!-- Rodapé: autoria, contato e links de navegação -->
+  <footer class="rodape mt-4 py-4">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <h2 class="h5 text-white">ClickPet</h2>
+          <p class="mb-0">Tudo o que o seu melhor amigo precisa, em um só lugar!</p>
+        </div>
+        <div class="col-md-4">
+          <h2 class="h5 text-white">Contato</h2>
+          <address class="mb-0">
+            Rua das Palmeiras, 123 - Porto Alegre/RS<br>
+            (51) 99999-0000<br>
+            <a href="mailto:contato@clickpet.com.br">contato@clickpet.com.br</a>
+          </address>
+        </div>
+        <div class="col-md-4">
+          <h2 class="h5 text-white">Navegação</h2>
+          <ul class="list-unstyled mb-0"><li><a href="index.html">Início</a></li><li><a href="produtos.html">Produtos</a></li><li><a href="servicos.html">Serviços</a></li><li><a href="cadastro.html">Cadastro</a></li><li><a href="agendamento.html">Agendamento</a></li><li><a href="contato.html">Contato</a></li></ul>
+        </div>
+      </div>
+      <hr class="border-light">
+      <p class="mb-1">&copy; <span id="ano">2026</span> ClickPet. Site fictício criado para fins educacionais.</p>
+      <p class="mb-0">Desenvolvido por Adryan Kevin Moura de Assis - Análise e Desenvolvimento de Sistemas, PUCRS - Fundamentos de Sistemas Web (Fase 2).</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 (JavaScript) via CDN: necessário para o menu e o carrossel -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <!-- Funções comuns a todas as páginas -->
+  <script src="js/comum.js"></script>
+  <script src="js/agendamento.js"></script>
+</body>
+</html>

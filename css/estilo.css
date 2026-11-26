@@ -1,0 +1,117 @@
+/* ==========================================================
+   estilo.css - Estilos personalizados do site ClickPet
+   Complementa o Bootstrap 5 (carregado via CDN em cada página).
+   Seções: 1) Variáveis  2) Base  3) Componentes
+           4) Formulários  5) Acessibilidade  6) Alto contraste
+   ========================================================== */
+
+/* 1) VARIÁVEIS DE COR ------------------------------------- */
+:root {
+  --cor-principal: #0b6e69;      /* verde-azulado (contraste 6:1 com branco) */
+  --cor-principal-escura: #084f4b;
+  --cor-destaque: #f4a261;       /* laranja para detalhes */
+  --cor-fundo: #f7fbfa;
+  --cor-texto: #1d2b2a;
+}
+
+/* 2) BASE -------------------------------------------------- */
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
+}
+
+main { min-height: 60vh; }
+
+h1, h2, h3 { color: var(--cor-principal-escura); }
+
+/* 3) COMPONENTES ------------------------------------------ */
+.barra-topo { font-size: 0.9rem; }
+
+.navbar-clickpet { background-color: var(--cor-principal); }
+.navbar-clickpet .nav-link,
+.navbar-clickpet .navbar-brand { color: #ffffff; }
+.navbar-clickpet .nav-link:hover,
+.navbar-clickpet .nav-link:focus { color: #ffe8cc; text-decoration: underline; }
+.navbar-clickpet .nav-link.active { font-weight: 700; border-bottom: 3px solid var(--cor-destaque); }
+
+/* Botão principal personalizado */
+.btn-clickpet {
+  background-color: var(--cor-principal);
+  border-color: var(--cor-principal);
+  color: #ffffff;
+}
+.btn-clickpet:hover, .btn-clickpet:focus {
+  background-color: var(--cor-principal-escura);
+  border-color: var(--cor-principal-escura);
+  color: #ffffff;
+}
+
+/* Carrossel: altura controlada e legenda legível sobre a imagem */
+.carousel-item img { height: 340px; object-fit: cover; }
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.62);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  bottom: 1.25rem;
+}
+
+/* Cards de produto e serviço */
+.card-produto img { object-fit: cover; height: 190px; }
+.card-produto, .card-servico { transition: transform 0.2s, box-shadow 0.2s; }
+.card-produto:hover, .card-servico:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.preco { font-size: 1.25rem; font-weight: 700; color: var(--cor-principal-escura); }
+
+/* Rodapé */
+.rodape { background-color: #12302e; color: #ffffff; }
+.rodape a { color: #ffd9a8; }
+
+/* 4) FORMULÁRIOS ------------------------------------------ */
+fieldset.grupo {
+  border: 1px solid #b9d3d0;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem 0.5rem;
+  margin-bottom: 1.25rem;
+  background: #ffffff;
+}
+fieldset.grupo > legend {
+  float: none;
+  width: auto;
+  padding: 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cor-principal-escura);
+}
+.obrigatorio::after { content: " *"; color: #b00020; }
+.resumo-agendamento { background: #e8f4f2; border-left: 6px solid var(--cor-principal); }
+
+/* 5) ACESSIBILIDADE --------------------------------------- */
+/* Foco bem visível para quem navega só pelo teclado */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, .btn:focus-visible {
+  outline: 3px solid #ff9f1c;
+  outline-offset: 2px;
+}
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* 6) MODO DE ALTO CONTRASTE (ativado pelo botão no topo) --- */
+body.alto-contraste { background: #000000 !important; color: #ffffff !important; }
+body.alto-contraste h1, body.alto-contraste h2, body.alto-contraste h3,
+body.alto-contraste .preco, body.alto-contraste legend { color: #ffff00 !important; }
+body.alto-contraste a { color: #00e5ff !important; }
+body.alto-contraste .card, body.alto-contraste .bg-white, body.alto-contraste .bg-light,
+body.alto-contraste fieldset.grupo, body.alto-contraste .resumo-agendamento,
+body.alto-contraste .table, body.alto-contraste .list-group-item {
+  background: #000000 !important; color: #ffffff !important; border: 2px solid #ffffff !important;
+}
+body.alto-contraste .navbar-clickpet, body.alto-contraste .rodape { background: #000000 !important; border-bottom: 2px solid #ffffff; }
+body.alto-contraste .btn-clickpet { background: #ffff00; color: #000000; border-color: #ffff00; }
+body.alto-contraste .form-control, body.alto-contraste .form-select {
+  background: #000000; color: #ffffff; border: 2px solid #ffffff;
+}
