@@ -33,13 +33,22 @@ Site de um petshop fictício. A **Fase 1** fez a estrutura em HTML puro; a **Fas
 - Link "Pular para o conteúdo principal", `lang="pt-br"`, uso de `label` em todos os campos, `fieldset/legend` nos grupos, `aria-label`, `aria-live` nas mensagens e `scope`/`caption` nas tabelas.
 - Foco do teclado bem visível, cores com bom contraste e menu totalmente navegável por teclado.
 
+### Recursos visuais
+- **Fotos** (pasta `imagens/foto-*.jpg`): imagem de destaque do início, categorias e produtos (ração para cães, shampoo, bola e arranhador), otimizadas para carregar rápido e com `alt` descritivo.
+- **Ilustrações vetoriais (SVG)** criadas para o projeto: logotipo, 3 banners do carrossel e as imagens da ração para gatos e do tapete higiênico. Não perdem qualidade em nenhum tamanho de tela.
+- **Página inicial** com destaque (hero), faixa de diferenciais com ícones, carrossel, categorias, passo a passo do agendamento e chamada para ação.
+- **Ícones** do Bootstrap Icons e fonte **Nunito** (Google Fonts), com menu fixo no topo e destaque da página atual.
+- **Cards** com cantos arredondados, sombra, etiqueta de categoria, preço em destaque e efeito ao passar o mouse.
+- **Animações suaves** ao rolar a página e botão "voltar ao topo". Quem prefere menos movimento no sistema não vê as animações.
+- O modo de **alto contraste** continua funcionando em todos os novos elementos.
+
 ## Estrutura de pastas
 ```
 index.html  produtos.html  servicos.html
 cadastro.html  agendamento.html  contato.html  README.md
 css/estilo.css
-js/comum.js  inicio.js  produtos.js  cadastro.js  agendamento.js
-imagens/
+js/comum.js  efeitos.js  inicio.js  produtos.js  cadastro.js  agendamento.js
+imagens/  (fotos em JPG e ilustrações em SVG)
 ```
 
 ## Ajustes realizados (da Fase 1 para a Fase 2)
@@ -52,9 +61,10 @@ imagens/
 7. **Imagens:** tamanhos fixos (`width`/`height`) trocados por classes responsivas; textos `alt` reescritos de forma descritiva.
 8. **HTML validado:** todas as tags fechadas, `id` únicos, todos os campos com `label`, títulos em ordem (h1 > h2 > h3), `caption` e `scope` nas tabelas.
 9. **Datas:** corrigido o problema de fuso horário do JavaScript (o dia escolhido no calendário podia virar o dia anterior) e adicionada a proteção contra horário vazio ou duplicado.
-10. **Nome do projeto e links:** padronizados como **ClickPet** (o link do GitHub Pages diferencia maiúsculas de minúsculas).
+10. **Identidade visual:** imagens simples da primeira versão trocadas por ilustrações em SVG, novo layout com ícones, hero, cards e animações (ver "Recursos visuais").
+11. **Nome do projeto e links:** padronizados como **ClickPet** (o link do GitHub Pages diferencia maiúsculas de minúsculas).
 
 ## Observações
-- As imagens são ilustrativas e podem ser trocadas por fotos reais.
+- As imagens são ilustrativas e podem ser trocadas; basta manter os mesmos nomes de arquivo.
 - Nome, endereço, telefone e e-mail do petshop são fictícios.
-- O site usa o Bootstrap 5 por CDN, por isso precisa de internet para ficar com o visual completo.
+- O site usa Bootstrap 5, Bootstrap Icons e a fonte Nunito por CDN, por isso precisa de internet para ficar com o visual completo.

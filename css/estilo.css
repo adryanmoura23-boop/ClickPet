@@ -1,117 +1,216 @@
 /* ==========================================================
    estilo.css - Estilos personalizados do site ClickPet
    Complementa o Bootstrap 5 (carregado via CDN em cada página).
-   Seções: 1) Variáveis  2) Base  3) Componentes
-           4) Formulários  5) Acessibilidade  6) Alto contraste
+   Seções: 1) Variáveis  2) Base  3) Navegação  4) Destaque (hero)
+           5) Componentes  6) Formulários  7) Rodapé e extras
+           8) Animações  9) Acessibilidade  10) Alto contraste
    ========================================================== */
 
-/* 1) VARIÁVEIS DE COR ------------------------------------- */
+/* 1) VARIÁVEIS DE COR E FONTE ------------------------------- */
 :root {
-  --cor-principal: #0b6e69;      /* verde-azulado (contraste 6:1 com branco) */
+  --cor-principal: #0b6e69;         /* verde-azulado (contraste 6:1 com branco) */
   --cor-principal-escura: #084f4b;
-  --cor-destaque: #f4a261;       /* laranja para detalhes */
+  --cor-destaque: #f4a261;          /* laranja */
+  --cor-destaque-escura: #c4500a;
   --cor-fundo: #f7fbfa;
   --cor-texto: #1d2b2a;
+  --sombra-suave: 0 6px 18px rgba(8, 79, 75, 0.12);
+  --fonte-titulo: "Nunito", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
 }
 
-/* 2) BASE -------------------------------------------------- */
+/* 2) BASE ---------------------------------------------------- */
 body {
   background-color: var(--cor-fundo);
   color: var(--cor-texto);
-  line-height: 1.6;
+  line-height: 1.65;
 }
-
 main { min-height: 60vh; }
+h1, h2, h3, h4, .navbar-brand { font-family: var(--fonte-titulo); }
+h1, h2, h3 { color: var(--cor-principal-escura); font-weight: 800; }
 
-h1, h2, h3 { color: var(--cor-principal-escura); }
+/* Título de seção com uma barrinha laranja embaixo */
+.titulo-secao { position: relative; padding-bottom: 0.6rem; margin-bottom: 1.5rem; }
+.titulo-secao::after {
+  content: ""; position: absolute; left: 0; bottom: 0;
+  width: 64px; height: 5px; border-radius: 5px;
+  background: linear-gradient(90deg, var(--cor-destaque), var(--cor-principal));
+}
+/* Título de página interna (h1) */
+.titulo-pagina {
+  padding: 0.35rem 0 0.35rem 1rem;
+  margin-bottom: 1rem;
+  border-left: 8px solid var(--cor-destaque);
+}
 
-/* 3) COMPONENTES ------------------------------------------ */
+/* 3) NAVEGAÇÃO ---------------------------------------------- */
 .barra-topo { font-size: 0.9rem; }
-
-.navbar-clickpet { background-color: var(--cor-principal); }
-.navbar-clickpet .nav-link,
-.navbar-clickpet .navbar-brand { color: #ffffff; }
-.navbar-clickpet .nav-link:hover,
-.navbar-clickpet .nav-link:focus { color: #ffe8cc; text-decoration: underline; }
-.navbar-clickpet .nav-link.active { font-weight: 700; border-bottom: 3px solid var(--cor-destaque); }
-
-/* Botão principal personalizado */
-.btn-clickpet {
-  background-color: var(--cor-principal);
-  border-color: var(--cor-principal);
-  color: #ffffff;
+.navbar-clickpet {
+  background: linear-gradient(90deg, var(--cor-principal-escura), var(--cor-principal));
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
+.navbar-clickpet .nav-link, .navbar-clickpet .navbar-brand { color: #ffffff; }
+.navbar-clickpet .nav-link { border-radius: 2rem; padding: 0.4rem 0.9rem; margin: 0 0.1rem; }
+.navbar-clickpet .nav-link:hover, .navbar-clickpet .nav-link:focus {
+  background: rgba(255, 255, 255, 0.16); color: #fff;
+}
+.navbar-clickpet .nav-link.active { background: var(--cor-destaque); color: #1d2b2a; font-weight: 800; }
+
+/* Botões */
+.btn { border-radius: 2rem; font-weight: 700; }
+.btn-clickpet { background-color: var(--cor-principal); border-color: var(--cor-principal); color: #ffffff; }
 .btn-clickpet:hover, .btn-clickpet:focus {
-  background-color: var(--cor-principal-escura);
-  border-color: var(--cor-principal-escura);
-  color: #ffffff;
+  background-color: var(--cor-principal-escura); border-color: var(--cor-principal-escura); color: #ffffff;
+}
+.btn-destaque { background-color: var(--cor-destaque); border-color: var(--cor-destaque); color: #1d2b2a; }
+.btn-destaque:hover, .btn-destaque:focus { background-color: #ffb677; border-color: #ffb677; color: #1d2b2a; }
+
+/* 4) DESTAQUE (HERO) DA PÁGINA INICIAL ------------------------ */
+.hero {
+  background: linear-gradient(135deg, #dff3ef 0%, #fff1de 100%);
+  border-radius: 1.75rem;
+  padding: 2rem 1.5rem;
+  box-shadow: var(--sombra-suave);
+  overflow: hidden;
+}
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+.hero .destaque-texto { color: var(--cor-destaque-escura); }
+/* Foto do hero em formato orgânico ("blob"), com borda branca e sombra */
+.hero-foto {
+  width: 100%; max-width: 360px; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: top;
+  border: 6px solid #ffffff; box-shadow: 0 14px 30px rgba(8, 79, 75, 0.25);
+  border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%;
 }
 
-/* Carrossel: altura controlada e legenda legível sobre a imagem */
+/* Faixa de benefícios com ícones */
+.beneficio { display: flex; align-items: center; gap: 0.9rem; }
+.icone-circulo {
+  flex: 0 0 56px; width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--cor-principal); color: #ffffff; font-size: 1.5rem;
+}
+.icone-circulo.laranja { background: var(--cor-destaque); color: #1d2b2a; }
+
+/* 5) COMPONENTES -------------------------------------------- */
+/* Carrossel */
+.carousel { border-radius: 1.25rem; overflow: hidden; box-shadow: var(--sombra-suave); }
 .carousel-item img { height: 340px; object-fit: cover; }
 .carousel-caption {
-  background: rgba(0, 0, 0, 0.62);
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  bottom: 1.25rem;
+  background: rgba(0, 0, 0, 0.62); border-radius: 0.75rem;
+  padding: 0.75rem 1rem; bottom: 1.5rem;
 }
 
-/* Cards de produto e serviço */
-.card-produto img { object-fit: cover; height: 190px; }
-.card-produto, .card-servico { transition: transform 0.2s, box-shadow 0.2s; }
-.card-produto:hover, .card-servico:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+/* Cards (produtos, categorias, serviços) */
+.card { border: 0; border-radius: 1.25rem; box-shadow: var(--sombra-suave); overflow: hidden; }
+.card-produto, .card-servico, .passo { transition: transform 0.25s, box-shadow 0.25s; }
+.card-produto:hover, .card-servico:hover, .passo:hover {
+  transform: translateY(-6px); box-shadow: 0 14px 28px rgba(8, 79, 75, 0.2);
 }
-.preco { font-size: 1.25rem; font-weight: 700; color: var(--cor-principal-escura); }
+.card-produto img { width: 100%; height: auto; aspect-ratio: 4 / 3; transition: transform 0.35s; }
+.card-produto:hover img { transform: scale(1.06); }
+.card-produto .moldura { overflow: hidden; position: relative; }
+.badge-categoria {
+  position: absolute; top: 0.75rem; left: 0.75rem; z-index: 2;
+  background: #ffffff; color: var(--cor-principal-escura);
+  font-weight: 800; border-radius: 2rem; padding: 0.35rem 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+.preco {
+  display: inline-block; font-size: 1.2rem; font-weight: 800;
+  color: var(--cor-principal-escura); background: #e4f4f1;
+  border-radius: 2rem; padding: 0.2rem 0.9rem;
+}
+.lista-icones { list-style: none; padding-left: 0; }
+.lista-icones li { margin-bottom: 0.4rem; }
+.lista-icones .bi { color: var(--cor-principal); margin-right: 0.4rem; }
 
-/* Rodapé */
-.rodape { background-color: #12302e; color: #ffffff; }
-.rodape a { color: #ffd9a8; }
+/* Passo a passo do agendamento */
+.passo { background: #ffffff; border-radius: 1.25rem; padding: 1.25rem; height: 100%; box-shadow: var(--sombra-suave); }
+.numero-passo {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--cor-destaque); color: #1d2b2a; font-weight: 800; font-size: 1.25rem; margin-bottom: 0.6rem;
+}
 
-/* 4) FORMULÁRIOS ------------------------------------------ */
+/* Faixa de chamada para ação */
+.faixa-cta {
+  background: linear-gradient(120deg, var(--cor-principal-escura), var(--cor-principal));
+  color: #ffffff; border-radius: 1.5rem; padding: 2rem 1.5rem;
+}
+.faixa-cta h2 { color: #ffffff; }
+
+/* Quadros de informação (contato, tabelas) */
+.quadro { background: #ffffff; border-radius: 1.25rem; padding: 1.5rem; box-shadow: var(--sombra-suave); }
+.table { --bs-table-bg: transparent; }
+.table thead th { background: var(--cor-principal); color: #ffffff; }
+
+/* 6) FORMULÁRIOS --------------------------------------------- */
 fieldset.grupo {
-  border: 1px solid #b9d3d0;
-  border-radius: 0.5rem;
-  padding: 1rem 1.25rem 0.5rem;
-  margin-bottom: 1.25rem;
-  background: #ffffff;
+  border: 0; border-top: 6px solid var(--cor-principal);
+  border-radius: 1rem; padding: 1rem 1.25rem 0.5rem; margin-bottom: 1.25rem;
+  background: #ffffff; box-shadow: var(--sombra-suave);
 }
 fieldset.grupo > legend {
-  float: none;
-  width: auto;
-  padding: 0 0.5rem;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--cor-principal-escura);
+  float: none; width: auto; padding: 0 0.5rem; font-size: 1.15rem; font-weight: 800;
+  color: var(--cor-principal-escura); font-family: var(--fonte-titulo);
 }
+fieldset.grupo > legend .bi { color: var(--cor-destaque-escura); margin-right: 0.35rem; }
 .obrigatorio::after { content: " *"; color: #b00020; }
+.form-control, .form-select { border-radius: 0.75rem; }
 .resumo-agendamento { background: #e8f4f2; border-left: 6px solid var(--cor-principal); }
 
-/* 5) ACESSIBILIDADE --------------------------------------- */
-/* Foco bem visível para quem navega só pelo teclado */
+/* 7) RODAPÉ E EXTRAS ------------------------------------------ */
+.onda { line-height: 0; margin-top: 2rem; color: #12302e; }
+.onda svg { width: 100%; height: 60px; display: block; }
+.rodape { background-color: #12302e; color: #ffffff; margin-top: -1px !important; }
+.rodape a { color: #ffd9a8; }
+.rodape .bi { color: var(--cor-destaque); margin-right: 0.35rem; }
+
+/* Botão "voltar ao topo" */
+.btn-topo {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 1030;
+  width: 48px; height: 48px; border-radius: 50%; border: 0;
+  background: var(--cor-destaque); color: #1d2b2a; font-size: 1.4rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3); display: none;
+}
+.btn-topo.visivel { display: grid; place-items: center; }
+
+/* 8) ANIMAÇÕES ------------------------------------------------- */
+/* Os elementos só ficam escondidos se o JavaScript estiver ativo (classe js-reveal) */
+html.js-reveal .revelar { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
+html.js-reveal .revelar.visivel { opacity: 1; transform: none; }
+@keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.hero-foto { animation: flutuar 5s ease-in-out infinite; }
+
+/* 9) ACESSIBILIDADE ------------------------------------------- */
 a:focus-visible, button:focus-visible, input:focus-visible,
 select:focus-visible, textarea:focus-visible, .btn:focus-visible {
-  outline: 3px solid #ff9f1c;
-  outline-offset: 2px;
+  outline: 3px solid #ff9f1c; outline-offset: 2px;
 }
-/* Respeita quem prefere menos movimento */
+/* Respeita quem prefere menos movimento: sem animações e sem esconder nada */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
+  html.js-reveal .revelar { opacity: 1; transform: none; }
 }
 
-/* 6) MODO DE ALTO CONTRASTE (ativado pelo botão no topo) --- */
+/* 10) MODO DE ALTO CONTRASTE (botão no topo) -------------------- */
 body.alto-contraste { background: #000000 !important; color: #ffffff !important; }
 body.alto-contraste h1, body.alto-contraste h2, body.alto-contraste h3,
-body.alto-contraste .preco, body.alto-contraste legend { color: #ffff00 !important; }
+body.alto-contraste .preco, body.alto-contraste legend,
+body.alto-contraste .hero .destaque-texto { color: #ffff00 !important; }
 body.alto-contraste a { color: #00e5ff !important; }
 body.alto-contraste .card, body.alto-contraste .bg-white, body.alto-contraste .bg-light,
-body.alto-contraste fieldset.grupo, body.alto-contraste .resumo-agendamento,
-body.alto-contraste .table, body.alto-contraste .list-group-item {
-  background: #000000 !important; color: #ffffff !important; border: 2px solid #ffffff !important;
+body.alto-contraste fieldset.grupo, body.alto-contraste .resumo-agendamento, body.alto-contraste .quadro,
+body.alto-contraste .passo, body.alto-contraste .hero, body.alto-contraste .faixa-cta,
+body.alto-contraste .table, body.alto-contraste .list-group-item, body.alto-contraste .badge-categoria {
+  background: #000000 !important; color: #ffffff !important; border: 2px solid #ffffff !important; box-shadow: none !important;
 }
-body.alto-contraste .navbar-clickpet, body.alto-contraste .rodape { background: #000000 !important; border-bottom: 2px solid #ffffff; }
-body.alto-contraste .btn-clickpet { background: #ffff00; color: #000000; border-color: #ffff00; }
+body.alto-contraste .table thead th { background: #000000; color: #ffff00; }
+body.alto-contraste .navbar-clickpet, body.alto-contraste .rodape {
+  background: #000000 !important; border-bottom: 2px solid #ffffff;
+}
+body.alto-contraste .navbar-clickpet .nav-link.active { background: #ffff00; color: #000000; }
+body.alto-contraste .icone-circulo, body.alto-contraste .numero-passo { background: #ffff00; color: #000000; }
+body.alto-contraste .btn-clickpet, body.alto-contraste .btn-destaque,
+body.alto-contraste .btn-topo { background: #ffff00; color: #000000; border-color: #ffff00; }
 body.alto-contraste .form-control, body.alto-contraste .form-select {
   background: #000000; color: #ffffff; border: 2px solid #ffffff;
 }
+body.alto-contraste .onda { display: none; }

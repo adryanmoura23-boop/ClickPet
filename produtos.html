@@ -9,6 +9,11 @@
   <!-- Bootstrap 5 (CSS) via CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <!-- Estilos próprios do ClickPet (carregados depois, para poder sobrescrever o Bootstrap) -->
+  <!-- Fonte Nunito (Google Fonts) e ícones Bootstrap Icons via CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" crossorigin="anonymous">
   <link href="css/estilo.css" rel="stylesheet">
 </head>
 <body>
@@ -31,11 +36,11 @@
   </div>
 
   <!-- Cabeçalho com logo e menu de navegação (Bootstrap navbar) -->
-  <header>
+  <header class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-clickpet" aria-label="Menu principal">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-          <img src="imagens/logo.png" alt="Logotipo do ClickPet: uma pata branca sobre fundo verde" width="44" height="44" class="rounded">
+          <img src="imagens/logo.svg" alt="Logotipo do ClickPet: uma pata branca com um coração laranja sobre fundo verde" width="44" height="44">
           <span class="fw-bold">ClickPet</span>
         </a>
         <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
@@ -58,7 +63,7 @@
 
   <!-- Conteúdo principal da página -->
   <main id="conteudo" class="container py-4" tabindex="-1">
-    <h1>Nossos Produtos</h1>
+    <h1 class="titulo-pagina">Nossos Produtos</h1>
     <p>Confira alguns dos produtos mais procurados em cada categoria. Use os botões para filtrar.</p>
 
     <!-- Filtro por categoria (controlado por js/produtos.js) -->
@@ -72,25 +77,25 @@
     <p id="resultado-filtro" class="visually-hidden" aria-live="polite"></p>
 
     <section class="mb-4" aria-labelledby="cat-alimentacao" data-categoria="alimentacao">
-      <h2 id="cat-alimentacao" class="h4">Alimentação</h2>
+      <h2 id="cat-alimentacao" class="h4 titulo-secao">Alimentação</h2>
       <div class="row g-3">
         <div class="col-sm-6 col-lg-4">
           <article class="card h-100 card-produto">
-            <img src="imagens/racao-caes.png" class="card-img-top" alt="Pote cheio de ração seca marrom para cães">
+            <div class="moldura"><span class="badge-categoria">Alimentação</span><img src="imagens/foto-racao.jpg" class="card-img-top" alt="Embalagem de ração premium para cães com a foto de um golden retriever, ao lado de um pote com ração" loading="lazy"></div>
             <div class="card-body d-flex flex-column">
               <h3 class="h6 card-title">Ração Premium para Cães Adultos 10 kg</h3>
               <p class="card-text">Ração seca super premium, rica em proteínas, para cães adultos de porte médio e grande.</p>
-              <p class="preco mt-auto mb-0">R$ 189,90</p>
+              <p class="mt-auto mb-0"><span class="preco">R$ 189,90</span></p>
             </div>
           </article>
         </div>
         <div class="col-sm-6 col-lg-4">
           <article class="card h-100 card-produto">
-            <img src="imagens/racao-gatos.png" class="card-img-top" alt="Pote cheio de ração seca amarela para gatos">
+            <div class="moldura"><span class="badge-categoria">Alimentação</span><img src="imagens/racao-gatos.svg" class="card-img-top" alt="Pote cheio de ração seca amarela para gatos" loading="lazy"></div>
             <div class="card-body d-flex flex-column">
               <h3 class="h6 card-title">Ração Premium para Gatos Castrados 3 kg</h3>
               <p class="card-text">Ração seca com controle de peso e cuidado com o trato urinário.</p>
-              <p class="preco mt-auto mb-0">R$ 79,90</p>
+              <p class="mt-auto mb-0"><span class="preco">R$ 79,90</span></p>
             </div>
           </article>
         </div>
@@ -98,25 +103,25 @@
     </section>
 
     <section class="mb-4" aria-labelledby="cat-higiene" data-categoria="higiene">
-      <h2 id="cat-higiene" class="h4">Higiene</h2>
+      <h2 id="cat-higiene" class="h4 titulo-secao">Higiene</h2>
       <div class="row g-3">
         <div class="col-sm-6 col-lg-4">
           <article class="card h-100 card-produto">
-            <img src="imagens/shampoo.png" class="card-img-top" alt="Frasco azul de shampoo neutro para pets">
+            <div class="moldura"><span class="badge-categoria">Higiene</span><img src="imagens/foto-higiene.jpg" class="card-img-top" alt="Dois frascos de shampoo para pets com espuma, bolhas de sabão e uma toalha azul" loading="lazy"></div>
             <div class="card-body d-flex flex-column">
               <h3 class="h6 card-title">Shampoo Neutro para Cães e Gatos 500 ml</h3>
               <p class="card-text">Shampoo suave com aroma de camomila, indicado para peles sensíveis.</p>
-              <p class="preco mt-auto mb-0">R$ 24,90</p>
+              <p class="mt-auto mb-0"><span class="preco">R$ 24,90</span></p>
             </div>
           </article>
         </div>
         <div class="col-sm-6 col-lg-4">
           <article class="card h-100 card-produto">
-            <img src="imagens/tapete-higienico.png" class="card-img-top" alt="Pacote de tapetes higiênicos para cães">
+            <div class="moldura"><span class="badge-categoria">Higiene</span><img src="imagens/tapete-higienico.svg" class="card-img-top" alt="Pacote de tapetes higiênicos para cães" loading="lazy"></div>
             <div class="card-body d-flex flex-column">
               <h3 class="h6 card-title">Tapete Higiênico 30 unidades</h3>
               <p class="card-text">Tapetes super absorventes com controle de odor, 60 x 60 cm.</p>
-              <p class="preco mt-auto mb-0">R$ 49,90</p>
+              <p class="mt-auto mb-0"><span class="preco">R$ 49,90</span></p>
             </div>
           </article>
         </div>
@@ -124,25 +129,25 @@
     </section>
 
     <section class="mb-4" aria-labelledby="cat-brinquedos" data-categoria="brinquedos">
-      <h2 id="cat-brinquedos" class="h4">Brinquedos e Acessórios</h2>
+      <h2 id="cat-brinquedos" class="h4 titulo-secao">Brinquedos e Acessórios</h2>
       <div class="row g-3">
         <div class="col-sm-6 col-lg-4">
           <article class="card h-100 card-produto">
-            <img src="imagens/bola.png" class="card-img-top" alt="Bola de borracha vermelha">
+            <div class="moldura"><span class="badge-categoria">Brinquedos e Acessórios</span><img src="imagens/foto-bola.jpg" class="card-img-top" alt="Bola de borracha azul com patinhas amarelas e pontinhas massageadoras" loading="lazy"></div>
             <div class="card-body d-flex flex-column">
               <h3 class="h6 card-title">Bola de Borracha Maciça</h3>
               <p class="card-text">Bola resistente para cães, ajuda a gastar energia e cuida dos dentes.</p>
-              <p class="preco mt-auto mb-0">R$ 14,90</p>
+              <p class="mt-auto mb-0"><span class="preco">R$ 14,90</span></p>
             </div>
           </article>
         </div>
         <div class="col-sm-6 col-lg-4">
           <article class="card h-100 card-produto">
-            <img src="imagens/arranhador.png" class="card-img-top" alt="Arranhador de sisal verde para gatos">
+            <div class="moldura"><span class="badge-categoria">Brinquedos e Acessórios</span><img src="imagens/foto-arranhador.jpg" class="card-img-top" alt="Arranhador de papelão ondulado marrom com laterais rosa estampadas com patinhas" loading="lazy"></div>
             <div class="card-body d-flex flex-column">
-              <h3 class="h6 card-title">Arranhador para Gatos com Base</h3>
-              <p class="card-text">Arranhador de sisal com 60 cm de altura, ideal para afiar as unhas.</p>
-              <p class="preco mt-auto mb-0">R$ 89,90</p>
+              <h3 class="h6 card-title">Arranhador para Gatos Ondulado</h3>
+              <p class="card-text">Arranhador de papelão ondulado reforçado, ideal para afiar as unhas e relaxar.</p>
+              <p class="mt-auto mb-0"><span class="preco">R$ 89,90</span></p>
             </div>
           </article>
         </div>
@@ -150,8 +155,13 @@
     </section>
   </main>
 
+  <!-- Onda decorativa acima do rodapé (ignorada por leitores de tela) -->
+  <div class="onda" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" focusable="false"><path d="M0 30 C240 70 480 -10 720 30 C960 70 1200 -10 1440 30 L1440 60 L0 60 Z" fill="currentColor"/></svg>
+  </div>
+
   <!-- Rodapé: autoria, contato e links de navegação -->
-  <footer class="rodape mt-4 py-4">
+  <footer class="rodape py-4">
     <div class="container">
       <div class="row g-3">
         <div class="col-md-4">
@@ -161,9 +171,9 @@
         <div class="col-md-4">
           <h2 class="h5 text-white">Contato</h2>
           <address class="mb-0">
-            Rua das Palmeiras, 123 - Porto Alegre/RS<br>
-            (51) 99999-0000<br>
-            <a href="mailto:contato@clickpet.com.br">contato@clickpet.com.br</a>
+            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>Rua das Palmeiras, 123 - Porto Alegre/RS<br>
+            <i class="bi bi-telephone-fill" aria-hidden="true"></i>(51) 99999-0000<br>
+            <i class="bi bi-envelope-fill" aria-hidden="true"></i><a href="mailto:contato@clickpet.com.br">contato@clickpet.com.br</a>
           </address>
         </div>
         <div class="col-md-4">
@@ -177,10 +187,14 @@
     </div>
   </footer>
 
+  <!-- Botão "voltar ao topo" (aparece ao rolar a página; js/efeitos.js) -->
+  <button type="button" id="btn-topo" class="btn-topo" aria-label="Voltar ao topo da página"><i class="bi bi-arrow-up" aria-hidden="true"></i></button>
+
   <!-- Bootstrap 5 (JavaScript) via CDN: necessário para o menu e o carrossel -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <!-- Funções comuns a todas as páginas -->
   <script src="js/comum.js"></script>
+  <script src="js/efeitos.js"></script>
   <script src="js/produtos.js"></script>
 </body>
 </html>
